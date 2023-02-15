@@ -1,0 +1,17 @@
+.settings
+CMakeFiles
+generated
+pico-sdk
+pioasm
+
+dis
+elf2uf2
+
+.cproject
+.project
+Makefile
+cmake_install.cmake
+*.elf
+*.map
+CMakeCache.txt
+/build/
