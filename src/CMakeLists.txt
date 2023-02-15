@@ -27,6 +27,11 @@ pico_set_program_version(main "0.2")
 pico_enable_stdio_uart(main 1)
 pico_enable_stdio_usb(main 0)
 
+target_sources(main PRIVATE
+        ${CMAKE_CURRENT_LIST_DIR}/main.c
+        ${CMAKE_CURRENT_LIST_DIR}/timer.c
+        )
+
 # Add the standard library to the build
 target_link_libraries(main pico_stdlib)
 
@@ -37,5 +42,5 @@ target_link_libraries(main
         hardware_clocks
         )
 
-pico_add_extra_outputs(main)
-
+# pico_add_extra_outputs(main)
+# must be removed or build fails
