@@ -15,16 +15,16 @@ void loop()
     int counter = 0;
     for(;;)
     {
-        c = getchar();
-        if(c != EOF)
+        c = getchar_timeout_us(700000);
+        if(c == PICO_ERROR_TIMEOUT)
         {
-            printf("Echo %c\n", c);
+            printf("Hello, world! %i\n", counter);
+            //sleep_ms(700);
+            counter ++;
         }
         else
         {
-            printf("Hello, world! %i\n", counter);
-            sleep_ms(700);
-            counter ++;
+            printf("Echo %c\n", c);
         }
     }
 }
