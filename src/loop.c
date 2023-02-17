@@ -11,11 +11,20 @@
 
 void loop()
 {
+    volatile int c;
+    int counter = 0;
     for(;;)
     {
-        puts("Hello, world!");
-        sleep_ms(700);
-
+        c = getchar();
+        if(c != EOF)
+        {
+            printf("Echo %c\n", c);
+        }
+        else
+        {
+            printf("Hello, world! %i\n", counter);
+            sleep_ms(700);
+            counter ++;
+        }
     }
-
 }
