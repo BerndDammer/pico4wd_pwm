@@ -30,6 +30,7 @@ pico_enable_stdio_usb(main 0)
 target_sources(main PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}/main.c
         ${CMAKE_CURRENT_LIST_DIR}/timer.c
+        ${CMAKE_CURRENT_LIST_DIR}/loop.c
         )
 
 # Add the standard library to the build

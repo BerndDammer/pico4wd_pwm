@@ -1,4 +1,3 @@
-#include "timer.h"
 #include "loop.h"
 
 #include <stdio.h>
@@ -10,14 +9,13 @@
 
 
 
-int main()
+void loop()
 {
-    stdio_init_all();
+    for(;;)
+    {
+        puts("Hello, world!");
+        sleep_ms(700);
 
-    timer_init();
+    }
 
-
-    loop();
-
-    return 0;
 }
