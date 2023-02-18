@@ -1,5 +1,6 @@
 #include "loop.h"
 #include "blinker.h"
+#include "motor.h"
 
 #include <stdio.h>
 #include "pico/stdlib.h"
@@ -12,16 +13,19 @@
 
 void loop()
 {
-    volatile int c;
+    volatile int c; // make visible in debugger; avoid optimize out
     int counter = 0;
+
+    motor_set(20);
+
     for(;;)
     {
         c = getchar_timeout_us(1000000);
         if(c == PICO_ERROR_TIMEOUT)
         {
             printf("Hello, world! %i\n", counter);
-            //sleep_ms(700);
             counter ++;
+            motor_set(1000);
         }
         else
         {

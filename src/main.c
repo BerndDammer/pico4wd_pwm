@@ -1,6 +1,7 @@
 #include "timer.h"
 #include "loop.h"
 #include "blinker.h"
+#include "motor.h"
 
 #include <stdio.h>
 #include "pico/stdlib.h"
@@ -17,7 +18,7 @@ int main()
 
     timer_init();
     blinker_init();
-
+    motor_init();
 
     loop();
 
