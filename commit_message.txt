@@ -1,4 +1,5 @@
-pwm on pin 16
+pwm up down
+
 
 
 
