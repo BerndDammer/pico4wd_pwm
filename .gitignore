@@ -15,5 +15,7 @@ cmake_install.cmake
 *.map
 *.lst
 *.txt
+*.uf2
+
 CMakeCache.txt
 /build/

@@ -1,4 +1,5 @@
-pwm up down
+pwm run at 20kHz
+
 
 
 

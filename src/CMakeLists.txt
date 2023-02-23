@@ -26,7 +26,7 @@ pico_set_program_name(main "main")
 pico_set_program_version(main "0.2")
 
 pico_enable_stdio_uart(main 1)
-pico_enable_stdio_usb(main 0)
+pico_enable_stdio_usb(main 1)
 
 target_sources(main PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}/main.c

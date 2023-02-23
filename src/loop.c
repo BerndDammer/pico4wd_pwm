@@ -8,9 +8,10 @@
 #include "hardware/watchdog.h"
 #include "hardware/clocks.h"
 
-#define CONSOLE_TIMEOUT 5000000
-#define STEP_MAX 3000
-#define STEP_STEP 300
+#define CONSOLE_TIMEOUT 1000000
+#define STEP_MAX 100
+#define STEP_STEP 10
+#define STEP_START 20
 
 void menu(void)
 {
@@ -24,16 +25,23 @@ void menu(void)
 
 void loop()
 {
+    printf("------------------------------------\n");
+    printf("clock_get_hz(clk_sys) %u\n", clock_get_hz(clk_sys));
+    printf("------------------------------------\n");
+
     volatile int c; // make visible in debugger; avoid optimize out
     int counter = 0;
-    int step_value = 100;
+
+    int step_value = STEP_START;
+    motor_set(step_value);
 
     menu();
-    motor_set(step_value);
 
     for (;;)
     {
         c = getchar_timeout_us(CONSOLE_TIMEOUT);
+        blinker_toggle();
+
         if (c == PICO_ERROR_TIMEOUT)
         {
             printf("Loop Counter %i\n", counter);
@@ -68,6 +76,5 @@ void loop()
                 break;
             }
         }
-        blinker_toggle();
     }
 }

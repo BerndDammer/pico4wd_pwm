@@ -9,9 +9,6 @@
 #include "hardware/watchdog.h"
 #include "hardware/clocks.h"
 
-
-
-
 int main()
 {
     stdio_init_all();
