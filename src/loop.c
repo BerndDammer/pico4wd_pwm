@@ -9,21 +9,37 @@
 #include "hardware/clocks.h"
 
 #define CONSOLE_TIMEOUT 1000000
-#define STEP_MAX 100
-#define STEP_STEP 10
-#define STEP_START 20
+//#define STEP_MAX 100
+#define STEP_STEP (DRIVE_MAX / 10)
+//#define STEP_START 20
 
 void menu(void)
 {
     printf("------------------------------------\n");
+    printf("1 Front Left \n");
+    printf("2 Front right \n");
+    printf("3 Rear Left \n");
+    printf("4 Rear right \n");
     printf("u up \n");
     printf("d down\n");
-    printf("0 or (space) pwm 0\n");
+    printf("0 or (space) shutdown all\n");
     printf("press key to select\n");
     printf("------------------------------------\n");
 }
 
-void loop()
+int step_value = DRIVE_OFF;
+
+void shutdown(void)
+{
+    for (int i = FRONT_LEFT; i <= REAR_RIGHT; i++)
+    {
+        motor_set(i, DRIVE_OFF);
+    }
+    step_value = DRIVE_OFF;
+}
+
+
+void loop(void)
 {
     printf("------------------------------------\n");
     printf("clock_get_hz(clk_sys) %u\n", clock_get_hz(clk_sys));
@@ -31,9 +47,9 @@ void loop()
 
     volatile int c; // make visible in debugger; avoid optimize out
     int counter = 0;
+    enum WHEEL wheel = FRONT_LEFT;
 
-    int step_value = STEP_START;
-    motor_set(step_value);
+    shutdown();
 
     menu();
 
@@ -51,24 +67,39 @@ void loop()
         {
             switch (c)
             {
+            case '1':
+                wheel = FRONT_LEFT;
+                shutdown();
+                break;
+            case '2':
+                wheel = FRONT_RIGHT;
+                shutdown();
+                break;
+            case '3':
+                wheel = REAR_LEFT;
+                shutdown();
+                break;
+            case '4':
+                wheel = REAR_RIGHT;
+                shutdown();
+                break;
             case 'u':
                 step_value += STEP_STEP;
-                if (step_value > STEP_MAX)
-                    step_value = STEP_MAX;
-                motor_set(step_value);
+                if (step_value > DRIVE_MAX)
+                    step_value = DRIVE_MAX;
+                motor_set(wheel, step_value);
                 printf("New step value %i\n", step_value);
                 break;
             case 'd':
                 step_value -= STEP_STEP;
-                if (step_value < -STEP_MAX)
-                    step_value = -STEP_MAX;
-                motor_set(step_value);
+                if (step_value < DRIVE_MIN)
+                    step_value = DRIVE_MIN;
+                motor_set(wheel, step_value);
                 printf("New step value %i\n", step_value);
                 break;
             case ' ':
             case '0':
-                step_value = 0;
-                motor_set(step_value);
+                shutdown();
                 printf("New step value %i\n", step_value);
                 break;
             default:

@@ -1,6 +1,3 @@
-void motor_init();
-void motor_set(int pwm_val);
-
 enum WHEEL
 {
     FRONT_LEFT,
@@ -13,3 +10,5 @@ enum WHEEL
 #define DRIVE_OFF 0
 #define DRIVE_MIN -100
 
+void motor_init(void);
+void motor_set(enum WHEEL w, int pwm_val);

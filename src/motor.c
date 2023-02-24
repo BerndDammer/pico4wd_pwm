@@ -13,6 +13,20 @@
 
 #define FPWM 20000
 
+//////////////////////////////////////////////////////////////////////
+///
+/// Slice CHAN GPIO  Motor.PIN   WHEEL
+///    0    A   16      1.2   Left Front
+///         B   17      1.1
+///    7    A   14      2.2   Right Front
+///         B   15      2.1
+///    6    A   12      3.2   Left Rear
+///         B   13      3.1
+///    5    A   10      4.2   Right Rear
+///         B   11      4.1
+///
+///
+///////////////////////////////////////////////////////////
 typedef struct
 {
     uint slice;
@@ -22,6 +36,21 @@ typedef struct
     pwm_config pc;
 
 } s_cs_mot;
+
+s_cs_mot cs_mot[] =
+{
+{ 0, 16, 17,
+true,
+{ } },
+{ 7, 14, 15,
+true,
+{ } },
+{ 6, 12, 13,
+true,
+{ } },
+{ 5, 10, 11,
+true,
+{ } }, };
 
 void motor_init2(s_cs_mot *s)
 {
@@ -60,28 +89,26 @@ void motor_init2(s_cs_mot *s)
     pwm_set_enabled(s->slice, true);
 }
 
-s_cs_mot cs_mot1 =
-{ 0, 17, 16,
-true,
+void motor_init(void)
 {
-
-} };
-
-void motor_init()
-{
-    motor_init2(&cs_mot1);
+    for (int i = FRONT_LEFT; i <= REAR_RIGHT; i++)
+    {
+        s_cs_mot *m = &cs_mot[i];
+        motor_init2(m);
+    }
 }
 
-void motor_set(int pwm_val)
+void motor_set(const enum WHEEL w, int pwm_val)
 {
+    s_cs_mot *m = &cs_mot[w];
     if (pwm_val > 0)
     {
-        pwm_set_chan_level(cs_mot1.slice, PWM_CHAN_A, DRIVE_MAX - pwm_val);
-        pwm_set_chan_level(cs_mot1.slice, PWM_CHAN_B, DRIVE_MAX);
+        pwm_set_chan_level(m->slice, PWM_CHAN_A, DRIVE_MAX);
+        pwm_set_chan_level(m->slice, PWM_CHAN_B, DRIVE_MAX - pwm_val);
     }
     else
     {
-        pwm_set_chan_level(cs_mot1.slice, PWM_CHAN_A, DRIVE_MAX);
-        pwm_set_chan_level(cs_mot1.slice, PWM_CHAN_B, DRIVE_MAX + pwm_val);
+        pwm_set_chan_level(m->slice, PWM_CHAN_A, DRIVE_MAX + pwm_val);
+        pwm_set_chan_level(m->slice, PWM_CHAN_B, DRIVE_MAX);
     }
 }

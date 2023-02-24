@@ -1,4 +1,5 @@
-pwm run at 20kHz
+controlling all 4 wheels
+
 
 
 
