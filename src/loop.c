@@ -68,22 +68,22 @@ void loop(void)
             case '1':
                 wheel = FRONT_LEFT;
                 shutdown();
-                puts("Selected wheel: FRONT_LEFT\n");
+                puts("Selected wheel: FRONT_LEFT");
                 break;
             case '2':
                 wheel = FRONT_RIGHT;
                 shutdown();
-                puts("Selected wheel: FRONT_RIGHT\n");
+                puts("Selected wheel: FRONT_RIGHT");
                 break;
             case '3':
                 wheel = REAR_LEFT;
                 shutdown();
-                puts("Selected wheel: REAR_LEFT\n");
+                puts("Selected wheel: REAR_LEFT");
                 break;
             case '4':
                 wheel = REAR_RIGHT;
                 shutdown();
-                puts("Selected wheel: REAR_RIGHT\n");
+                puts("Selected wheel: REAR_RIGHT");
                 break;
             case 'u':
                 step_value += STEP_STEP;
