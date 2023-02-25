@@ -9,9 +9,7 @@
 #include "hardware/clocks.h"
 
 #define CONSOLE_TIMEOUT 1000000
-//#define STEP_MAX 100
 #define STEP_STEP (DRIVE_MAX / 10)
-//#define STEP_START 20
 
 void menu(void)
 {
@@ -70,18 +68,22 @@ void loop(void)
             case '1':
                 wheel = FRONT_LEFT;
                 shutdown();
+                puts("Selected wheel: FRONT_LEFT\n");
                 break;
             case '2':
                 wheel = FRONT_RIGHT;
                 shutdown();
+                puts("Selected wheel: FRONT_RIGHT\n");
                 break;
             case '3':
                 wheel = REAR_LEFT;
                 shutdown();
+                puts("Selected wheel: REAR_LEFT\n");
                 break;
             case '4':
                 wheel = REAR_RIGHT;
                 shutdown();
+                puts("Selected wheel: REAR_RIGHT\n");
                 break;
             case 'u':
                 step_value += STEP_STEP;
