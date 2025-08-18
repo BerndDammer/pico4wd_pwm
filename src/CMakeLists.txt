@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 # Initialise pico_sdk from installed location
 # (note this can come from environment, CMake cache etc)
-set(PICO_SDK_PATH "d:/RaspberryPiPico/pico-sdk")
+# set(PICO_SDK_PATH "d:/RaspberryPiPico/pico-sdk")
 
 # Pull in Raspberry Pi Pico SDK (must be before project)
 include(pico_sdk_import.cmake)
@@ -49,5 +49,5 @@ target_link_libraries(main
 # pull in common dependencies and additional pwm hardware support
 target_link_libraries(main pico_stdlib hardware_pwm)
 
-# pico_add_extra_outputs(main)
+pico_add_extra_outputs(main)
 # must be removed or build fails

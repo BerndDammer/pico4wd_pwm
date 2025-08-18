@@ -15,7 +15,25 @@ cmake_install.cmake
 *.map
 *.lst
 *.txt
+
 #*.uf2
+
+
+_deps
+picotool
+pioasm-install
+
+*.ninja*.*
+build.ninja
+*.ld
+
+*.dis
+*.hex
+*.bin
+
+makefile
 
 CMakeCache.txt
 /build/
+
+*.cmd
